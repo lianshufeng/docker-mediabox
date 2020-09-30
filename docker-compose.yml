@@ -51,7 +51,37 @@ services:
       - "82:80"
       - "6888:8080"
     volumes:
-      - "${store}:/aria2/downloads"
+      - "${store}/downloads:/aria2/downloads"
       - "${ariang_store}/conf:/aria2/conf"
     container_name: ariang
     restart: always
+    
+# samba \\ip\share
+  samba:
+    build:
+      context: ./docker-samba/
+      dockerfile: Dockerfile
+    image: samba
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    tmpfs:
+      - /tmp
+    stdin_open: true
+    deploy:
+      resources:
+        limits:
+          memory: 512M #限制内存
+    tty: true
+    volumes:
+      - "${store}:/mount"
+    container_name: samba
+    restart: always
+    command: '-p'
+    environment:
+      - TZ=UTC+08
+      - NMBD=yes
+      - WORKGROUP=WORKGROUP
+      - SHARE=share;/mount;yes;no;yes;;
