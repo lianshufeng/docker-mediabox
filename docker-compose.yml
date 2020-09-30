@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  # User : admin/admin
+  filebrowser:
+    image: filebrowser/filebrowser:${filebrowser_version}
+    ports:
+      - "80:80"
+    volumes:
+      - "${store}:/srv"
+      - "${filebrowser_store}/database.db:/database.db"
+      - "${filebrowser_store}/.filebrowser.json:/.filebrowser.json"
+    container_name: filebrowser
+    restart: always
+   
+
+# User : superuser/superuser
+  filerun:
+    image: afian/filerun:${filerun_version}
+    ports:
+      - "81:80"
+    volumes:
+      - "${filerun_store}/html:/var/www/html"
+      - "${store}:/user-files"
+    container_name: filerun
+    restart: always
+    depends_on:
+      - filerun_db
+    links:
+      - filerun_db:db
+  filerun_db:
+    image: mariadb:${filerundb_version}
+    container_name: filerun_db
+    environment:
+      MYSQL_ROOT_PASSWORD: filerun
+      MYSQL_USER: filerun
+      MYSQL_PASSWORD: filerun
+      MYSQL_DATABASE: filerun
+    volumes:
+      - ${filerun_store}/db:/var/lib/mysql    
+    restart: always
+
+# 下载工具
+  ariang:
+    build:
+      context: ./docker-ariang/
+      dockerfile: Dockerfile
+    image: ariang
+    ports:
+      - "6800:6800"
+      - "82:80"
+      - "6888:8080"
+    volumes:
+      - "${store}:/aria2/downloads"
+      - "${ariang_store}/conf:/aria2/conf"
+    container_name: ariang
+    restart: always
