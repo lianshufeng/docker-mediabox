@@ -1,2 +1,2 @@
 # Docker-MediaBox
-AriaNg + FileBrowser + Samba
+AriaNg + FileBrowser + Samba + sftp
