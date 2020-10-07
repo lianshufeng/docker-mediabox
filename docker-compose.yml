@@ -14,31 +14,6 @@ services:
     restart: always
    
 
-# User : superuser/superuser
-  filerun:
-    image: afian/filerun:${filerun_version}
-    ports:
-      - "81:80"
-    volumes:
-      - "${filerun_store}/html:/var/www/html"
-      - "${store}:/user-files"
-    container_name: filerun
-    restart: always
-    depends_on:
-      - filerun_db
-    links:
-      - filerun_db:db
-  filerun_db:
-    image: mariadb:${filerundb_version}
-    container_name: filerun_db
-    environment:
-      MYSQL_ROOT_PASSWORD: filerun
-      MYSQL_USER: filerun
-      MYSQL_PASSWORD: filerun
-      MYSQL_DATABASE: filerun
-    volumes:
-      - ${filerun_store}/db:/var/lib/mysql    
-    restart: always
 
 # 下载工具
   ariang:
@@ -85,3 +60,27 @@ services:
       - NMBD=yes
       - WORKGROUP=WORKGROUP
       - SHARE=share;/mount;yes;no;yes;;
+# minidlna
+  minidlna:
+    build:
+      context: ./docker-minidlna/minidlna/
+      dockerfile: Dockerfile
+    image: minidlna
+#    network_mode: 'host'  # 网络模式设为 host
+    environment:
+      - MINIDLNA_MEDIA_DIR=/media
+      - MINIDLNA_FRIENDLY_NAME=MiniDLNA
+      - MINIDLNA_INOTIFY=yes
+      - MINIDLNA_NOTIFY_INTERVAL=3
+      - MINIDLNA_NETWORK_INTERFACE=eth1
+    ports:
+      - "1900:1900/udp"
+      - "8200:8200/tcp"
+    volumes:
+      - ${minidlna_store}/cache:/var/lib/minidlna
+      - ${store}:/media
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+    restart: always
