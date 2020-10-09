@@ -3,13 +3,15 @@ version: "3"
 services:
   # User : admin/admin
   filebrowser:
-    image: filebrowser/filebrowser:${filebrowser_version}
+    build:
+      context: ./docker-filebrowser/
+      dockerfile: Dockerfile
+    image: filebrowser
     ports:
       - "80:80"
     volumes:
       - "${store}:/srv"
-      - "${filebrowser_store}/database.db:/database.db"
-      - "${filebrowser_store}/.filebrowser.json:/.filebrowser.json"
+      - "${filebrowser_store}:/db"
     container_name: filebrowser
     restart: always
    
@@ -63,7 +65,7 @@ services:
 # minidlna
   minidlna:
     build:
-      context: ./docker-minidlna/minidlna/
+      context: ./docker-minidlna/
       dockerfile: Dockerfile
     image: minidlna
 #    network_mode: 'host'  # 网络模式设为 host
