@@ -11,3 +11,6 @@ yum install dos2unix -y
 dos2unix .env
 find . -name "*" -exec dos2unix {} \;
 source ${PWD}/.env
+
+#设置权限，否则构建会导致没有权限访问脚本
+chmod -R 777 ./
