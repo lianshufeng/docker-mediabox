@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #进入当前目录
-cd `dirname $0`
+workdir=$(cd $(dirname $0); pwd)
+cd $workdir
 
 #安装工具
 yum install dos2unix -y
