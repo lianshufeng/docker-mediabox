@@ -1,19 +1,41 @@
 version: "3"
 
 services:
+
+  #nginx
+  nginx:
+    build:
+      context: ./docker-nginx/
+      dockerfile: Dockerfile
+    image: mediabox_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./docker-nginx/html:/usr/share/nginx/html"
+      - "./docker-nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
+      - "./docker-nginx/conf/conf.d:/etc/nginx/conf.d"
+      - "${nginx_store}/logs:/var/log/nginx"
+    container_name: mediabox_nginx
+    restart: always
+    links:
+      - "filebrowser"
+      - "ariang"
+
   # User : admin/admin
   filebrowser:
     build:
       context: ./docker-filebrowser/
       dockerfile: Dockerfile
-    image: filebrowser
-    ports:
-      - "80:80"
+    image: mediabox_filebrowser
+#    ports:
+#      - "80:80"
     volumes:
       - "${store}:/srv"
       - "${filebrowser_store}:/db"
-    container_name: filebrowser
+    container_name: mediabox_filebrowser
     restart: always
+
    
 
 
@@ -22,23 +44,24 @@ services:
     build:
       context: ./docker-ariang/
       dockerfile: Dockerfile
-    image: ariang
+    image: mediabox_ariang
     ports:
+#     - "82:80"
       - "6800:6800"
-      - "82:80"
       - "6888:8080"
     volumes:
       - "${store}/downloads:/aria2/downloads"
       - "${ariang_store}/conf:/aria2/conf"
-    container_name: ariang
+    container_name: mediabox_ariang
     restart: always
+
     
 # samba \\ip\share
   samba:
     build:
       context: ./docker-samba/
       dockerfile: Dockerfile
-    image: samba
+    image: mediabox_samba
     ports:
       - "137:137/udp"
       - "138:138/udp"
@@ -54,7 +77,7 @@ services:
     tty: true
     volumes:
       - "${store}:/mount"
-    container_name: samba
+    container_name: mediabox_samba
     restart: always
     command: '-p'
     environment:
@@ -62,12 +85,15 @@ services:
       - NMBD=yes
       - WORKGROUP=WORKGROUP
       - SHARE=share;/mount;yes;no;yes;;
+
+      
+      
 # minidlna
   minidlna:
     build:
       context: ./docker-minidlna/
       dockerfile: Dockerfile
-    image: minidlna
+    image: mediabox_minidlna
 #    network_mode: 'host'  # 网络模式设为 host
     environment:
       - MINIDLNA_MEDIA_DIR=/media
@@ -85,4 +111,7 @@ services:
       driver: "json-file"
       options:
         max-size: "1m"
+    container_name: mediabox_minidlna
     restart: always
+
+      
