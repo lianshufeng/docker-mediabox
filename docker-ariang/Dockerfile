@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3
 
 ENV AriaNgVersion 1.1.7
 

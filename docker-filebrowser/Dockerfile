@@ -4,7 +4,7 @@ FROM busybox as builder
 
 
 #依赖的版本
-FROM filebrowser/filebrowser:latest  
+FROM filebrowser/filebrowser:v2.8.0  
 
 #拷贝 sh 等命令
 COPY --from=builder /bin /bin
