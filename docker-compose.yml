@@ -45,6 +45,8 @@ services:
     image: mediabox_ariang
     ports:
 #      - "82:80"
+      - "6881-6999:6881-6999/udp"
+      - "51413:51413"
       - "6800:6800"
       - "6888:8080"
     volumes:
@@ -92,7 +94,7 @@ services:
       context: ./docker-minidlna/
       dockerfile: Dockerfile
     image: mediabox_minidlna
-#    network_mode: 'host'  # 网络模式设为 host
+#    network_mode: "host"  # 网络模式设为 host
     environment:
       - MINIDLNA_MEDIA_DIR=/media
       - MINIDLNA_FRIENDLY_NAME=MiniDLNA

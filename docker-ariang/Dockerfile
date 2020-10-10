@@ -1,7 +1,5 @@
 FROM alpine:latest
 
-MAINTAINER lianshufeng <251708339@qq.com>
-
 ENV AriaNgVersion 1.1.7
 
 #切换阿里的源
