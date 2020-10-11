@@ -17,9 +17,7 @@ services:
       - "${nginx_store}/logs:/var/log/nginx"
     container_name: mediabox_nginx
     restart: always
-    links:
-      - "filebrowser"
-      - "ariang"
+
 
   # User : admin/admin
   filebrowser:
@@ -37,14 +35,14 @@ services:
 
 
 
-# 下载工具
+# ariang
   ariang:
     build:
       context: ./docker-ariang/
       dockerfile: Dockerfile
     image: mediabox_ariang
     ports:
-#      - "82:80"
+#      - "80:8000"
       - "6881-6999:6881-6999/udp"
       - "51413:51413"
       - "6800:6800"
@@ -86,32 +84,21 @@ services:
       - WORKGROUP=WORKGROUP
       - SHARE=share;/mount;yes;no;yes;;
 
-      
-      
-# minidlna
-  minidlna:
+ 
+# jellyfin
+  jellyfin:
     build:
-      context: ./docker-minidlna/
+      context: ./docker-jellyfin/
       dockerfile: Dockerfile
-    image: mediabox_minidlna
-#    network_mode: "host"  # 网络模式设为 host
-    environment:
-      - MINIDLNA_MEDIA_DIR=/media
-      - MINIDLNA_FRIENDLY_NAME=MiniDLNA
-      - MINIDLNA_INOTIFY=yes
-      - MINIDLNA_NOTIFY_INTERVAL=3
-      - MINIDLNA_NETWORK_INTERFACE=eth1
+    image: mediabox_jellyfin
     ports:
+#      - "8096:8096/tcp"
+      - "8920:8920/tcp"
+      - "7359:7359/udp"
       - "1900:1900/udp"
-      - "8200:8200/tcp"
     volumes:
-      - ${minidlna_store}/cache:/var/lib/minidlna
+      - ${jellyfin_store}/config:/config
       - ${store}:/media
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-    container_name: mediabox_minidlna
+    container_name: mediabox_jellyfin
     restart: always
 
-      
