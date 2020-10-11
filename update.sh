@@ -30,15 +30,36 @@ UpdateProject(){
 	#删除临时目录
 	rm -rf /tmp/$4
 
-	#设置阿里云的源
+	
+	#alpine-阿里
 	sed -i "/FROM alpine/a\RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories" $workdir/$4/Dockerfile
+	sed -i "/FROM node:alpine/a\RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories" $workdir/$4/Dockerfile
+	
+	
+	
+	#ubuntu-阿里
+	sed -i "/FROM ubuntu/a\RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	sed -i "/FROM ubuntu/a\RUN sed -i 's/security.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	
+	sed -i "/FROM lsiobase\/ubuntu/a\RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	sed -i "/FROM lsiobase\/ubuntu/a\RUN sed -i 's/security.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	
+	
+	#debian-阿里
+	sed -i "/FROM debian/a\RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	sed -i "/FROM debian/a\RUN sed -i 's/security.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list" $workdir/$4/Dockerfile
+	
 	
 	echo "finish -> "$4
 }
 
 
+# minidlna
+# UpdateProject "https://github.com/vladgh/docker_base_images/archive/master.zip" "docker_base_images-master" "minidlna" "docker-minidlna"
+
+#jellyfin
+#UpdateProject "https://github.com/linuxserver/docker-jellyfin/archive/master.zip" "docker-jellyfin-master" "." "docker-jellyfin"
+
+
 # samba
 UpdateProject "https://github.com/dperson/samba/archive/master.zip" "samba-master"  "." "docker-samba"
-
-# minidlna
-UpdateProject "https://github.com/vladgh/docker_base_images/archive/master.zip" "docker_base_images-master" "minidlna" "docker-minidlna"
