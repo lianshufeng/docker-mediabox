@@ -31,5 +31,5 @@ RUN find /aria-ng/js/ -name aria-ng*.js -exec sed -i 's/"6800"/"80"/g' {} \;
 EXPOSE 6800 80 8080
 
 
-
+RUN chmod -R 777 /aria2/init.sh
 ENTRYPOINT sh /aria2/init.sh

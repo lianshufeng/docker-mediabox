@@ -63,3 +63,4 @@ UpdateProject(){
 
 # samba
 UpdateProject "https://github.com/dperson/samba/archive/master.zip" "samba-master"  "." "docker-samba"
+sed -i "/ENTRYPOINT/i\RUN chmod -R 777 /usr/bin/samba.sh" $workdir/docker-samba/Dockerfile

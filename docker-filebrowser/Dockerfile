@@ -17,6 +17,7 @@ COPY database.db /tmp/backup/database.db
 #拷贝启动命令
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod -R 777 /entrypoint.sh
+RUN chmod -R 777 /filebrowser
 
 # 启动任务
 ENTRYPOINT [ "/entrypoint.sh" ]

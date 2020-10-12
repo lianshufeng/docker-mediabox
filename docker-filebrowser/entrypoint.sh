@@ -11,6 +11,5 @@ if [ ! -f "/db/database.db" ];then
 fi
 
 
-
 #启动服务
 /filebrowser
