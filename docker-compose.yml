@@ -81,6 +81,7 @@ services:
       - NMBD=yes
       - WORKGROUP=WORKGROUP
       - SHARE=share;/mount;yes;no;yes;;
+      - SMB=LANMAN1 #兼容性更好
 
  
 # jellyfin
