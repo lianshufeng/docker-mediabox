@@ -1,10 +1,10 @@
 
 #多阶段构建命令
-FROM busybox as builder
+FROM --platform=linux/arm/v7 busybox as builder
 
 
 #依赖的版本
-FROM filebrowser/filebrowser:v2.8.0-pi
+FROM --platform=linux/arm/v7 filebrowser/filebrowser:v2.8.0-pi
 COPY qemu-arm-static /usr/bin/
 
 #拷贝 sh 等命令
