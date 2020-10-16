@@ -1,38 +1,57 @@
 # Docker-MediaBox
 AriaNg + FileBrowser + Samba + jellyfin
 
-### run docker
-- down script
+### Run Docker
+- download script
 ````shell
 git clone https://github.com/lianshufeng/docker-mediabox.git
 cd docker-mediabox
 ````
 
+### How Use
+- shell
+````
+# Samba
+\\ip\share
 
-### docker-compose
-- amd64 / pc
+
+# all web server on port 80 
+
+# Jellyfin 
+http://ip
+# FileBrowser (user/password : admin/admin)
+http://ip/files
+# AriaNg 
+http://ip/dl
+
+````
+
+
+
+### Docker-Compose
+- Amd64 / pc
 ````shell
 source .env
 docker-compose -f docker-compose-amd64.yml up -d
 ````
 
-- arm / raspberrypi 
+- Arm / Raspberrypi 
 ````shell
 source .env
 docker-compose -f docker-compose-arm.yml up -d
 ````
-- source 
+- Source 
 ````shell
 docker-compose up -d
 ````
 
-### configure
+### Configure
 - update .env file
 ````shell
-# user data 
+# User Data 
 store=/opt/store/fs
 
-# application data 
+# Application data 
 filebrowser_store=/opt/store/filebrowser
 ariang_store=/opt/store/ariang
 nginx_store=/opt/store/nginx
