@@ -1,2 +1,2 @@
 #latest 稳定版
-FROM --platform= jellyfin/jellyfin:latest
+FROM --platform=linux/arm/v7 jellyfin/jellyfin:latest
