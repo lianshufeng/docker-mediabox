@@ -67,4 +67,5 @@ UpdateProject "https://github.com/dperson/samba/archive/master.zip" "samba-maste
 sed -i "/ENTRYPOINT/i\RUN chmod -R 777 /usr/bin/samba.sh" $workdir/docker-samba/Dockerfile
 sed -i "/ENTRYPOINT/i\RUN chmod -R 777 /usr/bin/samba.sh" $workdir/docker-samba/Dockerfile.armhf
 #禁用推送钩子
-rm -rf $workdir/docker-samba/hooks/post_push
+rm -rf $workdir/docker-samba/hooks
+cp -r $workdir/docker-nginx/hooks $workdir/docker-samba/hooks
