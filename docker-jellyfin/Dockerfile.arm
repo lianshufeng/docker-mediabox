@@ -1,0 +1,6 @@
+FROM arm32v6/alpine as builder
+
+
+#latest 稳定版
+FROM jellyfin/jellyfin:latest
+COPY qemu-arm-static /usr/bin/
