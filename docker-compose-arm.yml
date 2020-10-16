@@ -12,7 +12,13 @@ services:
       - "${nginx_store}/logs:/var/log/nginx"
     container_name: mediabox_nginx
     restart: always
-
+    depends_on:
+      - filebrowser
+      - ariang
+      - jellyfin
+      
+      
+      
 
   # User : admin/admin
   filebrowser:
@@ -42,6 +48,22 @@ services:
     container_name: mediabox_ariang
     restart: always
 
+ 
+# jellyfin
+  jellyfin:
+    image: lianshufeng/mediabox_jellyfin:arm
+    ports:
+#      - "8096:8096/tcp"
+      - "8920:8920/tcp"
+      - "7359:7359/udp"
+      - "1900:1900/udp"
+    volumes:
+      - ${jellyfin_store}/config:/config
+      - ${store}:/media
+    container_name: mediabox_jellyfin
+    restart: always
+
+
     
 # samba \\ip\share
   samba:
@@ -65,24 +87,10 @@ services:
     restart: always
     command: '-p'
     environment:
+      - USERID=0
+      - GROUPID=0
       - TZ=UTC+08
       - NMBD=yes
       - WORKGROUP=WORKGROUP
       - SHARE=share;/mount;yes;no;yes;;
       - SMB=LANMAN1 #兼容性更好
-
- 
-# jellyfin
-  jellyfin:
-    image: lianshufeng/mediabox_jellyfin:arm
-    ports:
-#      - "8096:8096/tcp"
-      - "8920:8920/tcp"
-      - "7359:7359/udp"
-      - "1900:1900/udp"
-    volumes:
-      - ${jellyfin_store}/config:/config
-      - ${store}:/media
-    container_name: mediabox_jellyfin
-    restart: always
-
