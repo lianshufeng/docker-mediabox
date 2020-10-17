@@ -69,3 +69,14 @@ sed -i "/ENTRYPOINT/i\RUN chmod -R 777 /usr/bin/samba.sh" $workdir/docker-samba/
 #禁用推送钩子
 rm -rf $workdir/docker-samba/hooks
 cp -r $workdir/docker-nginx/hooks $workdir/docker-samba/hooks
+
+
+
+
+
+# 同步 README.md
+rm -rf $workdir/docker-samba/README.md ; cp $workdir/README.md $workdir/docker-samba/
+rm -rf $workdir/docker-nginx/README.md ; cp $workdir/README.md $workdir/docker-nginx/
+rm -rf $workdir/docker-jellyfin/README.md ; cp $workdir/README.md $workdir/docker-jellyfin/
+rm -rf $workdir/docker-filebrowser/README.md ; cp $workdir/README.md $workdir/docker-filebrowser/
+rm -rf $workdir/docker-ariang/README.md ; cp $workdir/README.md $workdir/docker-ariang/
