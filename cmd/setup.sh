@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #进入当前目录
-workdir=$(cd $(dirname $0); pwd)
+workdir=$(cd $(dirname $0); pwd)/../
 cd $workdir
 
 #安装工具

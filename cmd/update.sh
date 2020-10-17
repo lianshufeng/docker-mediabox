@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #获取当前执行的脚本文件的父目录
-workdir=$(cd $(dirname $0); pwd)
+workdir=$(cd $(dirname $0); pwd)/../
 
 echo $workdir
 
