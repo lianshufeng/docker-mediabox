@@ -23,8 +23,8 @@ WORKDIR /
 VOLUME ["/aria2/conf", "/aria2/downloads"]
 
 
-#修改 ariang 请求RPC的默认端口6800 -> 80
-RUN find /aria-ng/js/ -name aria-ng*.js -exec sed -i 's/"6800"/"80"/g' {} \;
+#修改 ariang 请求RPC的请求地址，需要配合nginx使用
+RUN find /aria-ng/js/ -name aria-ng*.js -exec sed -i 's/getCurrentRpcUrl:function()/getCurrentRpcUrl:function()\{return ".\/jsonrpc"; \},test_backup:function()/g' {} \;
 
 
 
