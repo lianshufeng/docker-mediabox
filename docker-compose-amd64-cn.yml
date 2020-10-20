@@ -62,10 +62,7 @@ services:
     container_name: mediabox_jellyfin
     restart: always
     extra_hosts:
-      - "api.themoviedb.org:13.224.161.90"
-      - "image.tmdb.org:104.16.61.155"
-      - "api.themoviedb.org:13.35.67.86"
-      - "www.themoviedb.org:54.192.151.79"
+      - "api.themoviedb.org:23.235.147.127" #如果失效，请更换ip
 
 
 # samba \\ip\share
