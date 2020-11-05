@@ -4,7 +4,7 @@ services:
 
   #nginx
   nginx:
-    image: lianshufeng/mediabox_nginx:latest
+    image: lianshufeng/mediabox_nginx:${platform}
     ports:
       - "80:80"
       - "443:443"
@@ -21,7 +21,7 @@ services:
 
   # User : admin/admin
   filebrowser:
-    image: lianshufeng/mediabox_filebrowser:latest
+    image: lianshufeng/mediabox_filebrowser:${platform}
 #    ports:
 #      - "80:80"
     volumes:
@@ -34,7 +34,7 @@ services:
 
 # ariang
   ariang:
-    image: lianshufeng/mediabox_ariang:latest
+    image: lianshufeng/mediabox_ariang:${platform}
     ports:
 #      - "80:8000"
       - "6881-6999:6881-6999/udp"
@@ -50,7 +50,7 @@ services:
      
 # jellyfin
   jellyfin:
-    image: lianshufeng/mediabox_jellyfin:latest
+    image: lianshufeng/mediabox_jellyfin:${platform}
     ports:
 #      - "8096:8096/tcp"
       - "8920:8920/tcp"
@@ -65,7 +65,7 @@ services:
 
 # samba \\ip\share
   samba:
-    image: lianshufeng/mediabox_samba:latest
+    image: lianshufeng/mediabox_samba:${platform}
     ports:
       - "137:137/udp"
       - "138:138/udp"

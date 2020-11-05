@@ -4,7 +4,7 @@ services:
 
   #nginx
   nginx:
-    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-nginx
+    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-nginx:${platform}
     ports:
       - "80:80"
       - "443:443"
@@ -21,7 +21,7 @@ services:
 
   # User : admin/admin
   filebrowser:
-    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-filebrowser
+    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-filebrowser:${platform}
 #    ports:
 #      - "80:80"
     volumes:
@@ -34,7 +34,7 @@ services:
 
 # ariang
   ariang:
-    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-ariang
+    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-ariang:${platform}
     ports:
 #      - "80:8000"
       - "6881-6999:6881-6999/udp"
@@ -50,7 +50,7 @@ services:
     
 # jellyfin
   jellyfin:
-    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-jellyfin
+    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-jellyfin:${platform}
     ports:
 #      - "8096:8096/tcp"
       - "8920:8920/tcp"
@@ -67,7 +67,7 @@ services:
 
 # samba \\ip\share
   samba:
-    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-samba
+    image: registry.cn-chengdu.aliyuncs.com/mediabox/docker-samba:${platform}
     ports:
       - "137:137/udp"
       - "138:138/udp"
