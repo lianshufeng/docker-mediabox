@@ -7,7 +7,7 @@ services:
     build:
       context: ./docker-nginx/
       dockerfile: Dockerfile
-    image: mediabox_nginx
+    image: lianshufeng/mediabox_nginx
     ports:
       - "80:80"
       - "443:443"
@@ -26,7 +26,7 @@ services:
     build:
       context: ./docker-filebrowser/
       dockerfile: Dockerfile
-    image: mediabox_filebrowser
+    image: lianshufeng/mediabox_filebrowser
 #    ports:
 #      - "80:80"
     volumes:
@@ -42,7 +42,7 @@ services:
     build:
       context: ./docker-ariang/
       dockerfile: Dockerfile
-    image: mediabox_ariang
+    image: lianshufeng/mediabox_ariang
     ports:
 #      - "80:8000"
       - "6881-6999:6881-6999/udp"
@@ -61,7 +61,7 @@ services:
     build:
       context: ./docker-jellyfin/
       dockerfile: Dockerfile
-    image: mediabox_jellyfin
+    image: lianshufeng/mediabox_jellyfin
     ports:
 #      - "8096:8096/tcp"
       - "8920:8920/tcp"
@@ -80,7 +80,7 @@ services:
     build:
       context: ./docker-samba/
       dockerfile: Dockerfile
-    image: mediabox_samba
+    image: lianshufeng/mediabox_samba
     ports:
       - "137:137/udp"
       - "138:138/udp"
