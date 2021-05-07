@@ -1,6 +1,6 @@
 FROM alpine:3
 
-ENV AriaNgVersion 1.1.7
+ENV AriaNgVersion 1.2.1
 
 #切换阿里的源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories

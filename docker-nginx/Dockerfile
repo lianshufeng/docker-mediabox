@@ -1,4 +1,4 @@
-FROM nginx:1.19.3
+FROM nginx:1.20.0
 
 
 #拷贝配置文件
