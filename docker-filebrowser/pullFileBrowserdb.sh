@@ -2,7 +2,7 @@
 
 
 #更新db
-docker run -d --name filebrowser filebrowser/filebrowser:v2.10.0
+docker run -d --name filebrowser filebrowser/filebrowser:v2.22.4
 docker cp filebrowser:/.filebrowser.json .filebrowser.json
 #docker cp filebrowser:/database.db database.db #不需要拷贝,不存在会自动新建
 docker rm -f filebrowser
