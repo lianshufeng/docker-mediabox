@@ -1,4 +1,4 @@
-FROM arm32v6/nginx:1.20.0-alpine
+FROM arm32v6/nginx:1.23-alpine
 COPY qemu-arm-static /usr/bin/
 
 #拷贝配置文件
