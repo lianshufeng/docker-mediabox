@@ -1,13 +1,5 @@
-
-#多阶段构建命令
-FROM busybox as builder
-
-
 #依赖的版本
 FROM filebrowser/filebrowser:v2.25.0
-
-#拷贝 sh 等命令
-COPY --from=builder /bin /bin
 
 #备份配置库文件
 RUN mkdir -p /tmp/backup
