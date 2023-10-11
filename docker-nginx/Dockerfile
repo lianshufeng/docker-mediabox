@@ -1,4 +1,4 @@
-FROM nginx:1.23-alpine
+FROM nginx:latest
 
 
 #拷贝配置文件

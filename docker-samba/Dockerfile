@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:latest
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 MAINTAINER David Personette <dperson@gmail.com>
 
